@@ -1,5 +1,7 @@
 package chess.controller;
 
+import chess.dto.CreateGameDto;
+import chess.service.ChessService;
 import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -9,6 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class GameController {
 
     private final ChessService chessService;
+
+    public GameController(ChessService chessService) {
+        this.chessService = chessService;
+    }
 
     @PostMapping("/create")
     public CreateGameDto createGame() {

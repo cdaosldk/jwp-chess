@@ -1,4 +1,4 @@
 package chess.entity;
 
-public class Knight {
+public class Game {
 }
