@@ -1,6 +1,7 @@
 package chess.controller;
 
 import chess.dto.CreateGameDto;
+import chess.dto.GameDto;
 import chess.service.ChessService;
 import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.web.bind.annotation.*;
