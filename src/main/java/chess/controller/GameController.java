@@ -3,7 +3,6 @@ package chess.controller;
 import chess.dto.CreateGameDto;
 import chess.dto.GameDto;
 import chess.service.ChessService;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,21 +18,25 @@ public class GameController {
 
     @PostMapping("/create")
     public CreateGameDto createGame() {
-        return chessService.createGame();
+//        return chessService.createGame();
+        return null;
     }
 
     @GetMapping("/{id}")
     public ModelAndView findGame(@PathVariable int id) {
         GameDto gameDto = chessService.findGame(id);
 
-        return ResponseUtil.createModelAndView(HTML_TEMPLATE_PATH, gameDto);
+//        return ResponseUtil.createModelAndView(HTML_TEMPLATE_PATH, gameDto);
+
+        return null;
     }
 
     @PostMapping("/{id}")
-    public ModelAndView playGame(@PathVariable int id,
-                                 @RequestBody MoveRoute moveRoute) {
-        chessService.playGame(id, new MoveEvent(moveRoute));
-        GameDto gameDto = chessService.findGame(id);
-        return ResponseUtil.createModelAndView(HTML_TEMPLATE_PATH, gameDto);
+    public ModelAndView playGame(@PathVariable int id) {
+//                                 @RequestBody MoveRoute moveRoute) {
+//        chessService.playGame(id, new MoveEvent(moveRoute));
+//        GameDto gameDto = chessService.findGame(id);
+//        return ResponseUtil.createModelAndView(HTML_TEMPLATE_PATH, gameDto);
+    return null;
     }
 }

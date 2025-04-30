@@ -1,6 +1,6 @@
 package chess.exception;
 
-class InvalidMoveException extends RuntimeException {
+public class InvalidMoveException extends RuntimeException {
     public InvalidMoveException(String message) {
         super(message);
     }

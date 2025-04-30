@@ -1,14 +1,21 @@
 package chess.service;
 
-import chess.entity.*;
-import chess.dto.*;
+import chess.dto.GameDto;
+import chess.entity.Game;
 import chess.repository.GameRepository;
+import common.constants.ResponseCode;
+import common.dto.CommonResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 @Service
 @Transactional
 public class ChessService {
+
+    @Resource
+    private ChessService thisChessService;
 
     private final GameRepository gameRepository;
 
@@ -16,40 +23,33 @@ public class ChessService {
         this.gameRepository = gameRepository;
     }
 
-    public CreateGameDto createGame() {
+    public CommonResponseDto createGame() {
         Game game = new Game();
         game.initializeBoard();
-        Game savedGame = gameRepository.save(game);
-        return new CreateGameDto(savedGame.getId());
+//        Game savedGame = gameRepository.save(game);
+
+        return null;
+//        return new CommonResponseDto.Builder().status(ResponseCode.SUCCESS.getCode()).message(ResponseCode.SUCCESS.getMessage()).data(new Object()).build();
     }
 
     @Transactional(readOnly = true)
     public GameDto findGame(int id) {
-        Game game = gameRepository.findById(id)
-                .orElseThrow(() -> new GameNotFoundException("Game not found with id: " + id));
+//        Game game = gameRepository.findById(id)
+//                .orElseThrow(() -> new GameNotFoundException("Game not found with id: " + id));
 
-        return GameDto.from(game);
+//        return GameDto.from(game);
+        return null;
     }
 
-    public void playGame(int id, MoveEvent moveEvent) {
-        Game game = gameRepository.findById(id)
-                .orElseThrow(() -> new GameNotFoundException("Game not found with id: " + id));
-
-        validateMove(game, moveEvent);
-        game.move(moveEvent.getSource(), moveEvent.getTarget());
-
-        if (game.isCheckmate()) {
-            game.endGame();
-        }
-
-        gameRepository.save(game);
-    }
-}
-
-enum GameStatus {
-    IN_PROGRESS, FINISHED
-}
-
-enum Color {
-    WHITE, BLACK
+//    public void playGame(int id, MoveEvent moveEvent) {
+//        Game game = gameRepository.findById(id)
+//                .orElseThrow(() -> new GameNotFoundException("Game not found with id: " + id));
+//
+//        validateMove(game, moveEvent);
+//        game.move(moveEvent.getSource(), moveEvent.getTarget());
+//
+//        if (game.isCheckmate()) {
+//            game.endGame();
+//        }
+//        CreateGameDto(gameRepository.save(game).getId());
 }
