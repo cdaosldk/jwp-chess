@@ -2,6 +2,7 @@ package chess.entity;
 
 import chess.entity.piece.Piece;
 //import chess.service.Color;
+import chess.enums.Color;
 import chess.enums.GameStatus;
 
 import javax.persistence.CascadeType;
@@ -27,13 +28,13 @@ public class Game {
     @Enumerated(EnumType.STRING)
     private GameStatus status = GameStatus.IN_PROGRESS;
 
-//    @Enumerated(EnumType.STRING)
-//    private Color currentTurn = Color.WHITE;
+    @Enumerated(EnumType.STRING)
+    private Color currentTurn = Color.WHITE;
 
     public void initializeBoard() {
         // Initialize chess pieces in their starting positions
-//        initializePawns();
-//        initializeRooks();
+        initializePawns();
+//        initializeLooks();
 //        initializeKnights();
 //        initializeBishops();
 //        initializeQueens();
@@ -73,5 +74,7 @@ public class Game {
         this.status = GameStatus.FINISHED;
     }
 
-    // Additional helper methods...
+    private void initializePawns() {
+
+    }
 }
