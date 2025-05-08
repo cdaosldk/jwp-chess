@@ -6,6 +6,7 @@ import chess.enums.Color;
 import chess.enums.GameStatus;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
@@ -22,6 +23,9 @@ public class Game {
     @GeneratedValue
     private int id;
 
+    @Embeddable
+    private ChessBoard[][] boards = new ChessBoard[8][8];
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piece> pieces = new ArrayList<>();
 
@@ -32,7 +36,6 @@ public class Game {
     private Color currentTurn = Color.WHITE;
 
     public void initializeBoard() {
-        // Initialize chess pieces in their starting positions
         initializePawns();
 //        initializeLooks();
 //        initializeKnights();
@@ -75,6 +78,5 @@ public class Game {
     }
 
     private void initializePawns() {
-
     }
 }
