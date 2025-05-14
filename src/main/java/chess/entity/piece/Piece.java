@@ -1,12 +1,7 @@
 package chess.entity.piece;
 
-import chess.entity.Game;
 import chess.enums.Color;
-import chess.exception.InvalidMoveException;
-import chess.exception.InvalidPositionException;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;

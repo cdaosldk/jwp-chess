@@ -23,9 +23,6 @@ public class Game {
     @GeneratedValue
     private int id;
 
-    @Embeddable
-    private ChessBoard[][] boards = new ChessBoard[8][8];
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piece> pieces = new ArrayList<>();
 
@@ -34,6 +31,9 @@ public class Game {
 
     @Enumerated(EnumType.STRING)
     private Color currentTurn = Color.WHITE;
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChessBoard> chessBoards = new ArrayList<>();
 
     public void initializeBoard() {
         initializePawns();

@@ -1,13 +1,25 @@
 package chess.entity;
 
-public class ChessBoard {
-    private final int x;
-    private final int y;
-    private final boolean isOccupied;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-    public ChessBoard(int x, int y, boolean isOccupied) {
-        this.x = x;
-        this.y = y;
-        this.isOccupied = isOccupied;
-    }
+@Entity
+public class ChessBoard {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private int x;
+    private int y;
+    private boolean isOccupied;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
 }
