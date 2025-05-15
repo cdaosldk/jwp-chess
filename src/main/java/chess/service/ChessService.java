@@ -1,5 +1,6 @@
 package chess.service;
 
+import chess.dto.CreateGameDto;
 import chess.dto.GameDto;
 import chess.entity.Game;
 import chess.repository.GameRepository;
@@ -23,9 +24,10 @@ public class ChessService {
         this.gameRepository = gameRepository;
     }
 
-    public CommonResponseDto createGame() {
+    @Transactional
+    public CommonResponseDto<GameDto> createGame(CreateGameDto createGameDto) {
         Game game = new Game();
-        game.initializeBoard();
+        game.initializeBoard(createGameDto);
 //        Game savedGame = gameRepository.save(game);
 
         return null;

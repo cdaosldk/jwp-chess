@@ -12,7 +12,7 @@ public class CommonResponseDto<C> {
         this.data = data;
     }
 
-    public class Builder {
+    public static class Builder {
         private int status;
         private String message;
         private Object data;

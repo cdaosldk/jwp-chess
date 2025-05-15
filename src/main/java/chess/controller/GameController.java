@@ -3,6 +3,7 @@ package chess.controller;
 import chess.dto.CreateGameDto;
 import chess.dto.GameDto;
 import chess.service.ChessService;
+import common.dto.CommonResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +19,9 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CreateGameDto> createGame() {
+    public ResponseEntity<GameDto> createGame(CreateGameDto createGameDto) {
+        CommonResponseDto<GameDto> game = chessService.createGame(createGameDto);
+
         return null;
     }
 
