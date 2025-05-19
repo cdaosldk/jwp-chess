@@ -2,8 +2,10 @@ package chess.entity;
 
 import chess.dto.CreateGameDto;
 import chess.dto.GameDto;
+import chess.entity.piece.Pawn;
 import chess.entity.piece.Piece;
 //import chess.service.Color;
+import chess.entity.piece.Position;
 import chess.enums.Color;
 import chess.enums.GameStatus;
 import common.dto.CommonResponseDto;
@@ -18,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Game {
@@ -28,6 +31,8 @@ public class Game {
 
     @Enumerated(EnumType.STRING)
     private Color color;
+
+    private String currentTurn;
 
     @Enumerated(EnumType.STRING)
     private GameStatus status;
@@ -68,30 +73,13 @@ public class Game {
         players.add(player2);
     }
 
-//    public boolean isValidMove(Position source, Position target) {
-//        Piece piece = findPieceAt(source);
-//        if (piece == null || piece.getColor() != currentTurn) {
-//            return false;
-//        }
-//
-//        return piece.canMove(target, this) && !moveCreatesCheck(source, target);
-//    }
-
-//    public void move(Position source, Position target) {
-//        Piece piece = findPieceAt(source);
-//        Piece targetPiece = findPieceAt(target);
-//
-//        if (targetPiece != null) {
-//            pieces.remove(targetPiece);
-//        }
-//
-//        piece.moveTo(target);
-//        switchTurn();
-//    }
-//
-//    private void switchTurn() {
-//        currentTurn = currentTurn == Color.WHITE ? Color.BLACK : Color.WHITE;
-//    }
+    private void switchTurn() {
+        if (currentTurn.equals("BLACK")) {
+            currentTurn = "WHITE";
+        } else {
+            currentTurn = "BLACK";
+        }
+    }
 //
 //    public boolean isCheckmate() {
 //        return isInCheck() && !hasValidMoves();
@@ -102,5 +90,9 @@ public class Game {
     }
 
     private void initializePawns(List<ChessBoard> chessBoards) {
+        for (int i = 0; i < 8; i++) {
+            Pawn pawn = new Pawn().
+        }
+        chessBoards.
     }
 }
