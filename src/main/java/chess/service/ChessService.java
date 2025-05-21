@@ -3,7 +3,9 @@ package chess.service;
 import chess.dto.CreateGameDto;
 import chess.dto.GameDto;
 import chess.entity.Game;
+import chess.entity.piece.Piece;
 import chess.repository.GameRepository;
+import chess.repository.PieceRepository;
 import common.constants.ResponseCode;
 import common.dto.CommonResponseDto;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,11 @@ public class ChessService {
     private ChessService thisChessService;
 
     private final GameRepository gameRepository;
+    private final PieceRepository pieceRepository;
 
-    public ChessService(GameRepository gameRepository) {
+    public ChessService(GameRepository gameRepository, PieceRepository pieceRepository) {
         this.gameRepository = gameRepository;
+        this.pieceRepository = pieceRepository;
     }
 
     @Transactional
@@ -43,15 +47,14 @@ public class ChessService {
         return null;
     }
 
-//    public void playGame(int id, MoveEvent moveEvent) {
-//        Game game = gameRepository.findById(id)
-//                .orElseThrow(() -> new GameNotFoundException("Game not found with id: " + id));
-//
-//        validateMove(game, moveEvent);
-//        game.move(moveEvent.getSource(), moveEvent.getTarget());
-//
-//        if (game.isCheckmate()) {
-//            game.endGame();
-//        }
-//        CreateGameDto(gameRepository.save(game).getId());
+    public void playPiece(int id, MoveEvent moveEvent) {
+        pieceRepository.findById(id);
+
+        validateMove(game, moveEvent);
+        game.move(moveEvent.getSource(), moveEvent.getTarget());
+
+        if (game.isCheckmate()) {
+            game.endGame();
+        }
+    }
 }

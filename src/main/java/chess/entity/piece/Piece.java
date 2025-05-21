@@ -27,42 +27,48 @@ public class Piece extends Position {
 }
     @Embeddable
     class Position {
-    private int x;
-    private int y;
+        private int x;
+        private int y;
 
-    public Position(int x, int y) {
-        validatePosition(x, y);
-        this.x = x;
-        this.y = y;
-    }
-
-    public Position() {
-
-    }
-
-    private void validatePosition(int x, int y) {
-        if (x < 0 || x > 7 || y < 0 || y > 7) {
-            throw new InvalidPositionException("Position out of board: " + x + "," + y);
-        }
-    }
-
-     public boolean isValidMove(Position source, Position target) {
-        Piece piece = findPieceAt(source);
-        if (piece == null || piece.getColor() != currentTurn) {
-            return false;
+        public Position(int x, int y) {
+            validatePosition(x, y);
+            this.x = x;
+            this.y = y;
         }
 
-        return piece.canMove(target, this) && !moveCreatesCheck(source, target);
-    }
+        public Position() {
 
-    public void move(Position source, Position target) {
-        Piece piece = findPieceAt(source);
-        Piece targetPiece = findPieceAt(target);
-
-        if (targetPiece != null) {
-            pieces.remove(targetPiece);
         }
 
-        piece.moveTo(target);
-    }
+        private void validatePosition(int x, int y) {
+            if (x < 0 || x > 7 || y < 0 || y > 7) {
+                throw new InvalidPositionException("Position out of board: " + x + "," + y);
+            }
+        }
+
+         public boolean isValidMove(Position target) {
+            Position source = new Position(x, y);
+
+            Piece piece = findPieceAt(source);
+            if (piece == null || piece.getColor() != currentTurn) {
+                return false;
+            }
+
+            return piece.canMove(target, this) && !moveCreatesCheck(source, target);
+        }
+
+        public void move(Position source, Position target) {
+            Piece piece = findPieceAt(source);
+            Piece targetPiece = findPieceAt(target);
+
+            if (targetPiece != null) {
+                pieces.remove(targetPiece);
+            }
+
+            piece.moveTo(target);
+        }
+
+        private Piece findPieceAt(Position source) {
+
+        }
 }
