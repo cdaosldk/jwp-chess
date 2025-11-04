@@ -1,6 +1,6 @@
 package common.dto;
 
-public class CommonResponseDto<C> {
+public class CommonResponseDto<T> {
 
     private int status;
     private String message;
@@ -12,7 +12,7 @@ public class CommonResponseDto<C> {
         this.data = data;
     }
 
-    public static class Builder {
+    public class Builder {
         private int status;
         private String message;
         private Object data;
@@ -32,8 +32,8 @@ public class CommonResponseDto<C> {
             return this;
         }
 
-        public CommonResponseDto<C> build() {
-            return new CommonResponseDto<C>(status, message, data);
+        public CommonResponseDto<T> build() {
+            return new CommonResponseDto<>(status, message, data);
         }
     }
 }

@@ -5,7 +5,6 @@ import chess.dto.GameDto;
 import chess.entity.piece.Pawn;
 import chess.entity.piece.Piece;
 //import chess.service.Color;
-import chess.entity.piece.Position;
 import chess.enums.Color;
 import chess.enums.GameStatus;
 import common.dto.CommonResponseDto;
@@ -48,9 +47,10 @@ public class Game {
 
     public void initializeBoard(CreateGameDto createGameDto) {
         chessBoards = new ArrayList<>();
+        pieces = new ArrayList<>();
         initializePlayers(createGameDto);
 
-        initializePawns(chessBoards);
+        initializePawns(chessBoards, pieces);
 //        initializeLooks(chessBoards);
 //        initializeKnights(chessBoards);
 //        initializeBishops(chessBoards);
@@ -89,10 +89,8 @@ public class Game {
         this.status = GameStatus.FINISHED;
     }
 
-    private void initializePawns(List<ChessBoard> chessBoards) {
+    private void initializePawns(List<ChessBoard> chessBoards, List<Piece> pieces) {
         for (int i = 0; i < 8; i++) {
-            Pawn pawn = new Pawn().
         }
-        chessBoards.
     }
 }
