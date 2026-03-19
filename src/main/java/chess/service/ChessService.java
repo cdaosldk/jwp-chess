@@ -53,12 +53,12 @@ public class ChessService {
         Piece piece = pieceRepository.findById(id)
         .orElseThrow(() -> new NotExistGameComponentException("Piece not found with id: " + id));
 
-        piece.move(Game game);
-        game.move(moveEvent.getSource(), moveEvent.getTarget());
-
-        if (game.isCheckmate()) {
-            game.endGame();
-        }
+//        piece.move(Game game);
+//        game.move(moveEvent.getSource(), moveEvent.getTarget());
+//
+//        if (game.isCheckmate()) {
+//            game.endGame();
+//        }
     }
 
 }

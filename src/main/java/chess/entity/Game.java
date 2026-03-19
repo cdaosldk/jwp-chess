@@ -73,7 +73,19 @@ public class Game {
         players.add(player2);
     }
 
-    private void switchTurn() {
+    public String getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public List<Piece> getPieces() {
+        return pieces;
+    }
+
+    public void removePiece(Piece piece) {
+        pieces.remove(piece);
+    }
+
+    public void switchTurn() {
         if (currentTurn.equals("BLACK")) {
             currentTurn = "WHITE";
         } else {
