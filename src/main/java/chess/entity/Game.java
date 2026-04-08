@@ -1,16 +1,10 @@
 package chess.entity;
 
 import chess.dto.CreateGameDto;
-import chess.dto.GameDto;
-import chess.entity.piece.Pawn;
-import chess.entity.piece.Piece;
-//import chess.service.Color;
 import chess.enums.Color;
 import chess.enums.GameStatus;
-import common.dto.CommonResponseDto;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
@@ -19,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Game {
@@ -37,35 +30,23 @@ public class Game {
     private GameStatus status;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Player> players;
-
-    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Piece> pieces = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChessBoard> chessBoards = new ArrayList<>();
 
     public void initializeBoard(CreateGameDto createGameDto) {
         chessBoards = new ArrayList<>();
-        pieces = new ArrayList<>();
         initializePlayers(createGameDto);
-
-        initializePawns(chessBoards, pieces);
-//        initializeLooks(chessBoards);
-//        initializeKnights(chessBoards);
-//        initializeBishops(chessBoards);
-//        initializeQueens(chessBoards);
-//        initializeKings(chessBoards);
+        // TODO: initializePawns, initializeLooks, initializeKnights, initializeBishops, initializeQueens, initializeKings
     }
 
     private void initializePlayers(CreateGameDto createGameDto) {
-        Player player1 =
-            new Player.Builder()
-                    .id(createGameDto.getPlayer1Id())
-                    .build();
+        Player player1 = new Player.Builder()
+                .id(createGameDto.getPlayer1Id())
+                .build();
 
-        Player player2 =
-            new Player.Builder()
+        Player player2 = new Player.Builder()
                 .id(createGameDto.getPlayer2Id())
                 .build();
 
@@ -73,36 +54,31 @@ public class Game {
         players.add(player2);
     }
 
-    public String getCurrentTurn() {
-        return currentTurn;
-    }
-
-    public List<Piece> getPieces() {
-        return pieces;
-    }
-
-    public void removePiece(Piece piece) {
-        pieces.remove(piece);
-    }
-
-    public void switchTurn() {
-        if (currentTurn.equals("BLACK")) {
+    private void switchTurn() {
+        if ("BLACK".equals(currentTurn)) {
             currentTurn = "WHITE";
         } else {
             currentTurn = "BLACK";
         }
     }
-//
-//    public boolean isCheckmate() {
-//        return isInCheck() && !hasValidMoves();
-//    }
 
     public void endGame() {
         this.status = GameStatus.FINISHED;
     }
 
-    private void initializePawns(List<ChessBoard> chessBoards, List<Piece> pieces) {
-        for (int i = 0; i < 8; i++) {
-        }
+    public int getId() {
+        return id;
+    }
+
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public String getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

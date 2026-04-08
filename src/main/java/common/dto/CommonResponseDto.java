@@ -4,30 +4,42 @@ public class CommonResponseDto<T> {
 
     private int status;
     private String message;
-    private Object data;
+    private T data;
 
-    CommonResponseDto(int status, String message, Object data) {
+    CommonResponseDto(int status, String message, T data) {
         this.status = status;
         this.message = message;
         this.data = data;
     }
 
-    public class Builder {
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public static class Builder<T> {
         private int status;
         private String message;
-        private Object data;
+        private T data;
 
-        public Builder status(int status) {
+        public Builder<T> status(int status) {
             this.status = status;
             return this;
         }
 
-        public Builder message(String message) {
+        public Builder<T> message(String message) {
             this.message = message;
             return this;
         }
 
-        public Builder data(Object data) {
+        public Builder<T> data(T data) {
             this.data = data;
             return this;
         }
